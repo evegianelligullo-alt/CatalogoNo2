@@ -263,7 +263,7 @@ footer{margin-top:2.5rem;padding:1.5rem 1rem 1.2rem;border-top:1px solid var(--b
 <header>
   <div><div class="logo">NO<span>2</span></div><span class="logo-sub">Electrónica &amp; Accesorios</span></div>
   <div class="hbtns">
-    <button class="hbtn" onclick="openAdmin()">⚙️ Gestionar</button>
+    <button class="hbtn" onclick="pedirclaveAdmin()">⚙️ Gestionar</button>
     <button class="cart-btn" onclick="toggleCart()">🛒 <span class="cart-count" id="cartCount">0</span></button>
   </div>
 </header>
@@ -707,7 +707,12 @@ function showToast(m){var t=document.getElementById("toast");t.textContent=m;t.c
 
 // ── ADMIN ──
 function populateCatSelects(){["af-cat","ef-cat"].forEach(function(id){var sel=document.getElementById(id);if(!sel)return;var cur=sel.value;sel.innerHTML=CATS.map(function(c){return "<option value='"+c.id+"'>"+c.label+"</option>";}).join("");if(cur)sel.value=cur;});}
-function openAdmin(){populateCatSelects();buildEditList();renderCuponList();pendingAddImgs=[];pendingEditImgs=[];document.getElementById("af-imgs").innerHTML="";document.getElementById("adminPanel").classList.add("open");document.body.style.overflow="hidden";}
+function pedirClaveAdmin(){
+  const clave = prompt('🔐 Contraseña:');
+  if(clave === 'NO215566152') { openAdmin(); }
+  else if(clave !== null) { alert('❌ Contraseña incorrecta'); }
+}
+  function openAdmin(){populateCatSelects();buildEditList();renderCuponList();pendingAddImgs=[];pendingEditImgs=[];document.getElementById("af-imgs").innerHTML="";document.getElementById("adminPanel").classList.add("open");document.body.style.overflow="hidden";}
 function closeAdmin(){document.getElementById("adminPanel").classList.remove("open");document.body.style.overflow="";}
 function closeAdminOut(e){if(e.target===document.getElementById("adminPanel"))closeAdmin();}
 function switchTab(t){["add","edit","store","cupones"].forEach(function(id,i){document.querySelectorAll(".atab")[i].classList.toggle("active",id===t);document.getElementById("tab-"+id).classList.toggle("active",id===t);});}
