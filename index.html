@@ -740,6 +740,13 @@ function selectEdit(id){
   var cur=document.getElementById("ef-imgs-current");cur.innerHTML="";(p.imgs||[]).forEach(function(k){var chip=document.createElement("div");chip.className="img-chip";chip.id="chip-"+k;chip.innerHTML="<img src='"+imgSrc(k)+"'><span>"+(k.startsWith("upload_")?"img":k)+"</span><button onclick='removeChip(\""+k+"\",\"edit\")'>✕</button>";cur.appendChild(chip);});
   document.getElementById("ef-imgs-new").innerHTML="";document.getElementById("editForm").style.display="block";document.getElementById("editMsg").textContent="";
 }
+  function selectEdit(id){
+  document.querySelectorAll(".prod-row").forEach(function(r){r.classList.remove("selected");});var er=document.getElementById("erow-"+id);if(er)er.classList.add("selected");
+  var p=findP(id);if(!p)return;editingId=id;pendingEditImgs=[];
+  document.getElementById("ef-name").value=p.name;document.getElementById("ef-brand").value=p.brand;document.getElementById("ef-cat").value=p.categoria||CATS[0].id;document.getElementById("ef-price").value=p.installments;document.getElementById("ef-pold").value=p.priceOld||"";document.getElementById("ef-urg").value=p.urgency||"";document.getElementById("ef-stock").value=p.stock||5;document.getElementById("ef-feats").value=(p.features||[]).join("\n");
+  var cur=document.getElementById("ef-imgs-current");cur.innerHTML="";(p.imgs||[]).forEach(function(k){var chip=document.createElement("div");chip.className="img-chip";chip.id="chip-"+k;chip.innerHTML="<img src='"+imgSrc(k)+"'><span>"+(k.startsWith("upload_")?"img":k)+"</span><button onclick='removeChip(\""+k+"\",\"edit\")'>✕</button>";cur.appendChild(chip);});
+  document.getElementById("ef-imgs-new").innerHTML="";document.getElementById("editForm").style.display="block";document.getElementById("editMsg").textContent="";
+}
 async function saveEdit(){
   if(!editingId)return;var p=findP(editingId);if(!p)return;
   p.name=document.getElementById("ef-name").value.trim()||p.name;p.brand=document.getElementById("ef-brand").value.trim()||p.brand;p.categoria=document.getElementById("ef-cat").value;p.installments=document.getElementById("ef-price").value.trim()||p.installments;p.priceOld=document.getElementById("ef-pold").value.trim()||null;p.urgency=document.getElementById("ef-urg").value.trim()||null;p.stock=parseInt(document.getElementById("ef-stock").value)||p.stock;
