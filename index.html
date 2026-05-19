@@ -712,7 +712,7 @@ function pedirClaveAdmin(){
   if(clave === 'NO215566152') { openAdmin(); }
   else if(clave !== null) { alert('❌ Contraseña incorrecta'); }
 }
-  function openAdmin(){populateCatSelects();buildEditList();renderCuponList();pendingAddImgs=[];pendingEditImgs=[];document.getElementById("af-imgs").innerHTML="";document.getElementById("adminPanel").classList.add("open");document.body.style.overflow="hidden";}
+function openAdmin(){populateCatSelects();buildEditList();renderCuponList();pendingAddImgs=[];pendingEditImgs=[];document.getElementById("af-imgs").innerHTML="";document.getElementById("adminPanel").classList.add("open");document.body.style.overflow="hidden";}
 function closeAdmin(){document.getElementById("adminPanel").classList.remove("open");document.body.style.overflow="";}
 function closeAdminOut(e){if(e.target===document.getElementById("adminPanel"))closeAdmin();}
 function switchTab(t){["add","edit","store","cupones"].forEach(function(id,i){document.querySelectorAll(".atab")[i].classList.toggle("active",id===t);document.getElementById("tab-"+id).classList.toggle("active",id===t);});}
