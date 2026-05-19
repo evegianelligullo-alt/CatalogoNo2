@@ -731,7 +731,7 @@ async function addProduct(){
 }
 function buildEditList(){
   var list=document.getElementById("editList");list.innerHTML="";document.getElementById("editForm").style.display="none";editingId=null;
-  PRODUCTS.forEach(function(p){var row=document.createElement("div");row.className="prod-row";row.id="erow-"+p.id;row.innerHTML="<img class='prod-row-thumb' src='"+imgSrc((p.imgs||[])[0]||"")+"'><div class='prod-row-info'><div class='prod-row-name'>"+p.name+"</div><div class='prod-row-price'>"+p.installments+"</div><div class='prod-row-cat'>"+(p.categoria||"")+"</div></div>";row.onclick=function(){selectEdit(p.id);};list.appendChild(row);});
+  PRODUCTS.forEach(function(p){var row=document.createElement("div");row.className="prod-row";row.id="erow-"+p.id;row.innerHTML="<img class='prod-row-thumb' src='"+imgSrc((p.imgs||[])[0]||"")+"'><div class='prod-row-info'><div class='prod-row-name'>"+p.name+"</div><div class='prod-row-price'>"+p.installments+"</div><div class='prod-row-cat'>"+(p.categoria||"")+"</div></div><button onclick=\"event.stopPropagation();togglePause('"+p.id+"',"+(p.is_active===false)+")\" style=\"margin-left:auto;background:"+(p.is_active===false?"#f87171":"#00e676")+";border:none;color:#000;font-size:.65rem;font-weight:700;padding:.25rem .6rem;border-radius:20px;cursor:pointer\">"+(p.is_active===false?"⏸ Pausado":"✅ Activo")+"</button></div></div>";row.onclick
 }
 function selectEdit(id){
   document.querySelectorAll(".prod-row").forEach(function(r){r.classList.remove("selected");});var er=document.getElementById("erow-"+id);if(er)er.classList.add("selected");
